@@ -102,7 +102,9 @@ public class UserServiceImpl implements UserService {
 		File f = new File(filepath);
 		try {
 			// 파일 전송 - 파일 업로드
+			
 			image.transferTo(f);
+			
 			// Dao의 파라미터 만들기
 			user.setEmail(email);
 			user.setPw(BCrypt.hashpw(pw, BCrypt.gensalt(10)));
@@ -110,7 +112,9 @@ public class UserServiceImpl implements UserService {
 			user.setCode(code);
 			// 데이터베이스에는 파일 이름만 저장
 			user.setImage(filename);
+			
 			userDao.register(user);
+			
 		
 		} catch (Exception e) {
 			System.out.println("회원가입 실패:" + e.getMessage());
@@ -256,11 +260,12 @@ public class UserServiceImpl implements UserService {
 	// 이메일로 회원을 찾은후 DB에 저장된 코드와 메일에 저장된 코드가 같으면.
 	@Override
 	public User regcode(HttpServletRequest request) {
+	
 		String check_email = request.getParameter("check_email");
 		String check_code = request.getParameter("check_code");
 		User user = new User();
 		user = userDao.regcode(check_email);
-		
+		System.out.println(user.getCode());  
 		String code = user.getCode();
 	
 		

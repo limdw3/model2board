@@ -43,9 +43,9 @@ public class UserController {
 	@RequestMapping(value = "user/register", method = RequestMethod.POST)
 	public String register(MultipartHttpServletRequest request, RedirectAttributes attr) {
 		
-		
+		System.out.println(request.getParameter("email")); // 대위기
 		Map<String, Object>map = userService.register(request);
-		
+		System.out.println("대위기2");
 		attr.addFlashAttribute("msg", "회원가입");
 		
 		// 회원가입시 메일로 기입한 이메일과 자체적으로 랜덤코드를 생성해서 보내줌 
@@ -137,7 +137,7 @@ public class UserController {
 		// 이메일 링크를 통한 인증하기
 		@RequestMapping(value = "user/regcheck", method = RequestMethod.GET)
 		public String regcheck(Model model, HttpServletRequest request, RedirectAttributes attr ,HttpSession session) {
-		
+			System.out.println("대위기기기");
 			User user = userService.regcode(request);
 			if(user == null) {
 				attr.addFlashAttribute("msg","회원인증실패");
