@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.dw.domain.User;
 import kr.co.dw.service.UserService;
-
+// 루키 루키 넌 나의 루키
 @Controller
 public class UserController {
 	@Autowired
