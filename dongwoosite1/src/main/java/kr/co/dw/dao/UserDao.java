@@ -68,7 +68,7 @@ public class UserDao {
 	public void resetpw(User user) {
 	
 		sqlSession.update("user.resetpw",user);
-		System.out.println("응믕");
+	
 		
 	}
 	
