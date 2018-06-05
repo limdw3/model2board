@@ -22,12 +22,16 @@ public class UserDao {
 		// <mapper namespace="user"> 를 말하고
 		// .emailCheck 는 <select id="emailcheck" 를 말한다.
 		// 참고로 , email 은 그냥 보내주는 값 말하는거임 ^_^
+	
 		return sqlSession.selectOne("user.emailcheck", email);
+	
 	}
 
 	// 회원가입을 위한 메소드
 	public void register(User user) {
+		System.out.println(user);
 		sqlSession.insert("user.register", user);
+		System.out.println(user);
 	}
 
 	// 5.UserDao 클래스에 로그인 처리를 위한 메소드를 생성

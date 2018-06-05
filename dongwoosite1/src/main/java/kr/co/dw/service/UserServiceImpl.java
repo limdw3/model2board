@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
 		// 파라미터 읽기
 		String email = request.getParameter("email");
 		// Dao의 메소드를 호출해서 결과를 전송
+		
 		return userDao.emailCheck(email);
 
 	}
@@ -110,6 +111,7 @@ public class UserServiceImpl implements UserService {
 			// 데이터베이스에는 파일 이름만 저장
 			user.setImage(filename);
 			userDao.register(user);
+		
 		} catch (Exception e) {
 			System.out.println("회원가입 실패:" + e.getMessage());
 		}
@@ -140,7 +142,7 @@ public class UserServiceImpl implements UserService {
 				user = null;
 			}
 		}
-
+		
 		return user;
 	}
 
