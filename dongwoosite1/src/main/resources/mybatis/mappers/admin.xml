@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+	<!-- 게시판 생성을 위한 SQL을 admin.xml 파일에 추가 -->
+	<!-- 게시판 생성을 위한 sql -->
+	<insert id="registerboard" parameterType="Admin">
+		insert into
+		d_admin(category,boardname,boardinfo,boardpaging,bigcategory)
+		values(boardseq.nextval,#{boardname},#{boardinfo},#{boardpaging},#{bigcategory})
+	</insert>
+
+	<!-- 홈창에 보여줄 리스트 -->
+	<select id="listboard" resultType="Admin">
+		select
+		category,boardname,boardinfo,boardpaging,bigcategory
+		from d_admin
+	</select>
+
+	<!-- 각 칵테고리에 맞는 테이블 게시판 보여줄때~ 페이징, 게시판이름 , 등 설정가져오기용 -->
+	<select id="categoryboard" parameterType="java.lang.Integer"
+		resultType="Admin">
+		select category,boardname,boardinfo,boardpaging,bigcategory
+		from d_admin
+		where category = #{category}
+	</select>
+</mapper>

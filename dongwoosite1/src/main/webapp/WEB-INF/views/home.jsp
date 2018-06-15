@@ -49,11 +49,94 @@
 	width: 50%;
 	height: 0;
 }
+
+<!-- 요기는 게시판 목록 스타일 지정 --!>
+
+table.type04 {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+  margin : 20px 10px;
+}
+table.type04 th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+table.type04 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
 </style>
 <!-- 모든 공간을 할당하는 div -->
 <div class="main">
 	<!-- 전체게시판과 지도를 가진 메인 div -->
-	<div class="main_1 main_common1"></div>
+	<div class="main_1 main_common1">
+		<!--  overflow:auto div 높이 넘어가면 스크롤 생김 
+		float 가로배치를 위해서 사용  -->
+	
+		<div style="overflow:auto;float: left;width: 33%;height:500px;"">
+			<table class="type04">
+				<tr scope="row">
+					<th  bgcolor="#E6E6E6" >인물 카테고리</th>
+					
+				</tr>
+				
+				<c:forEach var="vo" items="${board}">
+				<c:if test="${vo.bigcategory==1}">
+					<tr>
+						<!-- 이름을 클릭하면 board/list 로 보내는 태그에 보드이름 , 보드 pk 번호(d_board 의 외래키) , 페이징 설정을 태그에 넣어 보낸다.  -->
+						<td align="center"><a href="board/list?category=${vo.category}&boardname=${vo.boardname}&boardinfo=${vo.boardinfo}&boardpaging=${vo.boardpaging}"> ${vo.boardname}&nbsp;</a></td>
+						
+						
+					</tr>
+				</c:if>
+			
+				</c:forEach>
+			
+			</table>
+		</div>
+		<div style="float: left;width: 33%" >
+		<table class="type04">
+				<tr scope="row">
+					<th  bgcolor="#A4A4A4">기술 카테고리</th>
+					
+				</tr>
+				<c:forEach var="vo" items="${board}">
+				<c:if test="${vo.bigcategory==2}">
+					<tr>
+						<td align="center">${vo.boardname}&nbsp;</td>
+						
+						
+					</tr>
+				</c:if>
+				</c:forEach>
+			</table>
+		</div>
+		<div style="float: left;width: 33%">
+		<table class="type04">
+				<tr scope="row">
+					<th width="11%" bgcolor="#E6E6E6" >취미 카테고리</th>
+					
+				</tr>
+				<c:forEach var="vo" items="${board}">
+				<c:if test="${vo.bigcategory==3}">
+					<tr>
+						<td align="center">${vo.boardname}&nbsp;</td>
+						
+						
+					</tr>
+				</c:if>
+				</c:forEach>
+			</table>
+		</div>
+	</div>
 
 	<!-- 로그인 , 검색순위 , 채팅 등   서브 메뉴 div -->
 	<div class="main_2 main_common2">
@@ -151,7 +234,12 @@
 						</div>
 						<!-- user/etail 개인정조 창으로 이동 -->
 						<div class="form-group">
-							<a href="user/detail" class="btn btn-warning btn-block m-t-md">개인정보</a>
+							<c:if test="${user.grade == 0}">
+								<a href="user/detail" class="btn btn-warning btn-block m-t-md">개인정보</a>
+							</c:if>
+							<c:if test="${user.grade == 1}">
+								<a href="admin/controldiv" class="btn btn-warning btn-block m-t-md">관리 페이지</a>
+							</c:if>
 						</div>
 
 

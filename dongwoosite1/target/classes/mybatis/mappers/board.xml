@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<!-- 글 삽입을 위한 sql bno는 시퀀스 사용 -->
+	<insert id="register" parameterType="Board">
+		insert into d_board(
+		bno,category,image, title, content, ip, email, nickname)
+		values(boardseq.nextval,#{category},#{image},#{title},#{content},#{ip},
+		#{email},#{nickname})
+	</insert>
+
+
+	<!-- 2.board.xml 파일에 SpringBoard 테이블의 전체 데이터를 가져오는 SQL을 생성 -->
+	<!-- 게시글 전체를 가져오는 SQL -->
+	<select id="list" resultType="Board">
+		select bno, category, title,
+		nickname, regdate, readcnt, email
+		from d_board
+	</select>
+
+	<!-- 상세보기를 할 때 글 번호에 해당하는 데이터의 조회수를 1증가시켜주는 sql -->
+	<update id="updatecnt" parameterType="java.lang.Integer">
+		update d_board
+		set readcnt =
+		readcnt + 1
+		where bno = #{bno}
+	</update>
+
+	<!-- 상세보기를 하기 위해서 글 번호에 해당하는 데이터를 가져오는 sql -->
+	<select id="detail" parameterType="java.lang.Integer"
+		resultType="Board">
+		select *
+		from d_board
+		where bno = #{bno}
+	</select>
+	<!-- 게시글 수정을 위한 SQL -->
+	<update id="update" parameterType="Board">
+		update d_board
+		set
+		title=#{title}, content=#{content} ,image=#{image}, regdate=sysdate,
+		ip = #{ip}
+		where bno=#{bno}
+	</update>
+
+	<!-- 2.board.xml 파일에 게시글을 삭제하는 SQL을 작성 -->
+	<!-- 게시글 삭제를 위한 SQL -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from d_board
+		where bno=#{bno}
+	</delete>
+</mapper>

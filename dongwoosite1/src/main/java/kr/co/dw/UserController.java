@@ -94,6 +94,16 @@ public class UserController {
 				
 			attr.addFlashAttribute("msg", "로그인성공");
 			session.setAttribute("user", user);
+			//이전 요청을 가져오기
+			Object dest = session.getAttribute("dest");
+			//이전 요청이 없으면 시작 페이지로 이동
+			if(dest == null) {
+				return "redirect:/";
+			}
+			//이전 요청이 있으면 그 페이지로 이동
+			else {
+				return "redirect:/" + dest.toString();
+			}
 	
 			}
 			return "redirect:/";
