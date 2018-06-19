@@ -20,7 +20,7 @@ public class LoggingAdvice {
 	//kr.co.pk.. 은 kr.co.pk 패키지 안에 있는 모든
 	//*Dao 는 Dao로 끝나는 클래스 .* 은 메소드 이름이 무엇이든지
 	//(..)은 매개변수 개수에 상관없이
-	@Around("execution(public * kr.co.pk..*Dao.*(..))")
+	@Around("execution(public * kr.co.dw..*Dao.*(..))")
 	public Object invoke(ProceedingJoinPoint joinPoint)
 			throws Throwable{
 		//pointcut으로 설정된 메소드가 호출되기 전에 수행할 내용

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 @Component
-public class D_Interceptor implements HandlerInterceptor {
+public class  D_Interceptor implements HandlerInterceptor {
 
 	//Controller가 처리하기 전에 호출되는 메소드
 	//true를 리턴하면 Controller로 넘어가고

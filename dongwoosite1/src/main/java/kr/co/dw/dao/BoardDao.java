@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.dw.domain.Board;
+import kr.co.dw.domain.Criteria;
 
 @Repository
 public class BoardDao {
@@ -18,12 +19,12 @@ public class BoardDao {
 	public void register(Board board){
 		sqlSession.insert("board.register", board);
 	}
-	// 글 리스트 메소드 
-	public List<Board> list(){
-		
-		return sqlSession.selectList("board.list");
-		
-	}
+
+/*2)게시물 목록을 가져오는 메소드를 수정*/
+//게시물 전체 목록을 가져오는 메소드
+public List<Board> list(Criteria criteria){
+	return sqlSession.selectList("board.list", criteria);
+}
 	
 //	3.BoardDao 클래스에 글번호에 해당하는 데이터의 조회수를 1증가시켜 주는 메소드와 글번호에 해당하는 데이터를 가져오는 메소드를 생성
 
@@ -48,5 +49,10 @@ public class BoardDao {
 	public void delete(int bno) {
 		sqlSession.delete("board.delete", bno);
 	}
-
+/*	4.BoardDao 클래스에 전체 데이터 개수를 가져오는 메소드를 추가하고 게시물 목록을 가졍오는 메소드를 수정
+	1)전체 데이터 개수를 가져오는 메소드를 생성*/
+		//게시물의 데이터 개수를 가져오는 메소드
+		public int totalCount() {
+			return sqlSession.selectOne("board.totalcount");
+		}
 }

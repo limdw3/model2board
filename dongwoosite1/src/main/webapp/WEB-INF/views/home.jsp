@@ -76,12 +76,14 @@ table.type04 td {
 </style>
 <!-- 모든 공간을 할당하는 div -->
 <div class="main">
+
 	<!-- 전체게시판과 지도를 가진 메인 div -->
 	<div class="main_1 main_common1">
 		<!--  overflow:auto div 높이 넘어가면 스크롤 생김 
 		float 가로배치를 위해서 사용  -->
 	
 		<div style="overflow:auto;float: left;width: 33%;height:500px;"">
+			
 			<table class="type04">
 				<tr scope="row">
 					<th  bgcolor="#E6E6E6" >인물 카테고리</th>
@@ -418,8 +420,7 @@ table.type04 td {
 				dataType : "json", // 타입은 json 형식으로. 
 				success : function(data) {
 					// 데이터의 주고받음이 성공하면  address 라는 아이디를 가진 div 에게 html 형식을 추가한다. 가져온 data에 담긴 address 라는 객체를 <h3> 안에 담아.
-					document.getElementById("address").innerHTML = "<h3>"
-							+ data.address + "</h3>";
+					document.getElementById("address").innerHTML = "<h3>"+ data.address + "</h3>";
 				}
 			});
 

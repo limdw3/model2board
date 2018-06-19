@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="registerboard" parameterType="Admin">
 		insert into
 		d_admin(category,boardname,boardinfo,boardpaging,bigcategory)
-		values(boardseq.nextval,#{boardname},#{boardinfo},#{boardpaging},#{bigcategory})
+		values(d_adminseq.nextval,#{boardname},#{boardinfo},#{boardpaging},#{bigcategory})
 	</insert>
 
 	<!-- 홈창에 보여줄 리스트 -->

@@ -7,18 +7,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="register" parameterType="Board">
 		insert into d_board(
 		bno,category,image, title, content, ip, email, nickname)
-		values(boardseq.nextval,#{category},#{image},#{title},#{content},#{ip},
+		values(d_boardseq.nextval,#{category},#{image},#{title},#{content},#{ip},
 		#{email},#{nickname})
 	</insert>
 
 
-	<!-- 2.board.xml 파일에 SpringBoard 테이블의 전체 데이터를 가져오는 SQL을 생성 -->
-	<!-- 게시글 전체를 가져오는 SQL -->
-	<select id="list" resultType="Board">
-		select bno, category, title,
-		nickname, regdate, readcnt, email
-		from d_board
-	</select>
 
 	<!-- 상세보기를 할 때 글 번호에 해당하는 데이터의 조회수를 1증가시켜주는 sql -->
 	<update id="updatecnt" parameterType="java.lang.Integer">
@@ -50,4 +43,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from d_board
 		where bno=#{bno}
 	</delete>
+	
+	
+<!-- 3.board.xml 파일에 sql을 추가하고 수정
+1)전체 데이터 개수를 가져오는 SQL을 추가 -->
+	<!-- 전체 데이터 개수를 가져오는 SQL -->
+	<select id="totalcount" resultType="java.lang.Integer">
+		select count(*)
+		from d_board
+	</select>
+	<!-- 2)게시물 목록을 가져오는 SQL은 수정 - id가 list 인 SQL =>paramter를 이전에 만든 Criteria로 
+		설정을 해서 시작하는 데이터번호와 끝나는 데이터 번호를 이용해서 원하는 개수만큼 데이터를 가져오도록 변경 -->
+	<!-- 게시글 전체를 가져오는 SQL -->
+	<select id="list" resultType="Board" parameterType="Criteria">
+		select bno, title, nickname, regdate, readcnt, email,image,category
+		from (select rownum rnum, bno, title, nickname, regdate,
+			readcnt, email ,image,category
+			from (select * from d_board order by regdate desc))
+		where rnum &gt;= #{pageStart} and 
+		      rnum &lt;= #{pageStart} + #{perPageNum} - 1	
+	</select>
 </mapper>

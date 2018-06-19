@@ -30,13 +30,14 @@ public class HomeController {
 	// 디씨처럼 홈에서 바로 게시판 리스트 보여주기 위함.
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
+	
 		List<Admin> list = new ArrayList<Admin>();
-		
-		
+	
 		list = adminService.listboard(request);
-		
+	
 		request.setAttribute("board", list);
 		
+
 		return "home";
 	}
 	

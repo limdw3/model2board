@@ -11,10 +11,10 @@
 		id="dataSource">
 		<property value="oracle.jdbc.driver.OracleDriver"
 			name="driverClassName" />
-		<property value="jdbc:oracle:thin:@192.168.0.200:1521:xe"
+		<property value="jdbc:oracle:thin:@localhost:1521:xe"
 			name="url" />
-		<property value="user12" name="username" />
-		<property value="user12" name="password" />
+		<property value="system" name="username" />
+		<property value="system" name="password" />
 	</bean>
 
 	<!-- MyBatis 접속정보를 저장하는 클래스의 객체 생성 -->

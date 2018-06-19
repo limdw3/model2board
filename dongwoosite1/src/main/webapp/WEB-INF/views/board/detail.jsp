@@ -8,7 +8,9 @@
 </head>
 <body>
 	<%@ include file="../include/header.jsp"%>
-	${admin.category}
+					<div>
+
+					</div>
 	<section class="content">
 		<div class="box">
 			<div class="box-header">
@@ -59,6 +61,27 @@
 	</section>
 	<%@ include file="../include/footer.jsp"%>
 
+	<script>
+		//메인 버튼을 눌렀을 때 처리
+		document.getElementById("mainbtn").addEventListener("click",
+				function() {
+					location.href = "../";
+				});
+		//목록 버튼을 눌렀을 때 처리
+		document.getElementById("listbtn").addEventListener("click",
+				function() {
+					location.href = "list?category=${admin.category}&boardname=${admin.boardname}&boardinfo=${admin.boardinfo}&boardpaging=${admin.boardpaging}&page=${criteria.page}&perPageNum=${criteria.perPageNum}";
+				});
+		<c:if test = "${user.email == vo.email}">
+		//수정 버튼을 눌렀을 때 처리
+		document.getElementById("updatebtn").addEventListener("click",
+				function() {
+			location.href = "update?bno=${vo.bno}&page=${criteria.page}&perPageNum=${criteria.perPageNum}&category=${admin.category}";
+			});
+		</c:if>
+	</script>
+
+	<!-- 로그인 한 유저와 작성자가 동일한 경우 -->
 	<c:if test="${user.email == vo.email}">
 		<link rel="stylesheet"
 			href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -70,51 +93,29 @@
 
 		<script>
 			//삭제 버튼을 눌렀을 때 처리
-			document.getElementById("deletebtn").addEventListener("click",
-					function() {
+			document.getElementById("deletebtn").addEventListener(
+					"click", function(){
 						$("#dialog-confirm").dialog({
-							resizable : false,
-							height : "auto",
-							width : 400,
-							modal : true,
-							buttons : {
-								"삭제" : function() {
-									$(this).dialog("close");
-									location.href = "delete?bno=" + ${vo.bno}+"&category=" + ${admin.category};
-								},
-								"취소" : function() {
-									$(this).dialog("close");
-								}
-							}
-						});
-
-					});
+						      resizable: false,
+						      height: "auto",
+						      width: 400,
+						      modal: true,
+						      buttons: {
+						        "삭제": function() {
+						          $(this).dialog("close");
+						          location.href="delete?bno=${vo.bno}&page=${criteria.page}&perPageNum=${criteria.perPageNum}&category=${admin.category}";
+						        },
+						        "취소": function() {
+						          $(this).dialog("close");
+						        }
+						      }
+						    });
+						
+			});
 		</script>
+
 	</c:if>
 
-	<script>
-		//메인 버튼을 눌렀을 때 처리
-		document.getElementById("mainbtn").addEventListener("click",
-				function() {
-					location.href = "../";
-				});
-		//목록 버튼을 눌렀을 때 처리
-		document.getElementById("listbtn").addEventListener("click",
-				function() {
-					location.href = "list?category=" + ${admin.category};
-				});
-		<c:if test = "${user.email == vo.email}">
-	/* 	//삭제 버튼을 눌렀을 때 처리
-		document.getElementById("deletebtn").addEventListener("click",
-				function() {
-					location.href = "delete?bno=" + ${vo.bno};
-				}); */
-		//수정 버튼을 눌렀을 때 처리
-		document.getElementById("updatebtn").addEventListener("click",
-				function() {
-					location.href = "update?bno=" + ${vo.bno}+"&category=" + ${admin.category};
-				});
-		</c:if>
 	</script>
 
 

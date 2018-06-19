@@ -63,16 +63,9 @@ public class AdminServiceImpl implements AdminService {
 		Admin admin = new Admin();
 		List<Admin> list = new ArrayList<Admin>();
 		// 게시판 리스트 보기 실행시켜
-
+		;
 		list = adminDao.listboard();
-
-		/*
-		 * Map<String, Object> map = new HashMap<String,Object>();
-		 * 
-		 * map.put("Boardinfo",admin.getBoardinfo()); map.put("Category",
-		 * admin.getCategory()); map.put("Boardpaging",admin.getBoardpaging());
-		 * map.put("Boardname",admin.getBoardname());
-		 */
+		
 		return list;
 	}
 
