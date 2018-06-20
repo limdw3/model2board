@@ -9,14 +9,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.co.dw.domain.Board;
 import kr.co.dw.domain.Criteria;
+import kr.co.dw.domain.SearchCriteria;
 
 public interface BoardService {
 
 	// 글삽입해요~ 이미지 떄매 멀티싸염~
 	public void register(MultipartHttpServletRequest request);
-
-	// 게시물 전체를 가져오는 메소드()수정
-	public Map<String,Object> list(Criteria criteria);
+	
+	// 글 리스트 
+	public Map<String,Object> list(SearchCriteria criteria);
 
 	// 4.BoardService 인터페이스에 상세보기를 처리할 메소드를 선언
 	// 게시물 상세보기를 위한 메소드

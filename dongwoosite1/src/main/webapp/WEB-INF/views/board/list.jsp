@@ -21,24 +21,7 @@
 				<h3 class="box-title">${msg}</h3>
 			</c:if>
 		</div>
-		<!-- 출력할 데이터 개수를 설정하는 select -->
-		<div class="box-header with-border">
-			<span>목록개수</span>
-			<select id="count" class="form-control">
-				<option value="1" 
-				<c:out value="${map.pageMaker.criteria.perPageNum==1?'selected':'' }"/>
-				>1개씩 보기</option>
-				<option value="2"
-				<c:out value="${map.pageMaker.criteria.perPageNum==2?'selected':'' }"/>
-				>2개씩 보기</option>
-				<option value="3"
-				<c:out value="${map.pageMaker.criteria.perPageNum==3?'selected':'' }"/>
-				>3개씩 보기</option>
-				<option value="4"
-				<c:out value="${map.pageMaker.criteria.perPageNum==4?'selected':'' }"/>
-				>4개씩 보기</option>
-			</select>
-		</div>
+	
 		<div class="box-body">
 			<table class="table table-bordered table-hover">
 				<tr>
@@ -52,7 +35,13 @@
 				<c:if test="${admin.category eq vo.category}">
 					<tr>
 						<td align="right">${vo.bno}&nbsp;</td>
-						<td>&nbsp;<a href="detail?bno=${vo.bno}&category=${admin.category}&page=${map.pageMaker.criteria.page}&perPageNum=${map.pageMaker.criteria.perPageNum}">${vo.title}</a></td>
+						<td>&nbsp;<a href="detail?bno=${vo.bno}&replycnt=${vo.replycnt}&category=${admin.category}&page=${map.pageMaker.criteria.page}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.pageMaker.criteria.searchType}&keyword=${map.pageMaker.criteria.keyword}">${vo.title}</a>
+						<span class="badge badge-danger">${vo.replycnt}</span>
+						<c:if test="${vo.replycnt > 0}">
+							<img src="../resources/hot.png" 
+							width="25" height="25" />
+						</c:if>
+						</td>
 						<td>&nbsp;${vo.nickname}</td>
 						<td>&nbsp; ${vo.dispDate}</td>
 						<td align="right"><span class="badge bg-blue">
@@ -71,7 +60,7 @@
 					<!-- 이전 링크 -->
 					<c:if test="${map.pageMaker.prev}">
 						<li><a href=
-						"list?page=${map.pageMaker.startPage-1}&perPageNum=${map.pageMaker.criteria.perPageNum}">이전</a></li>
+						"list?page=${map.pageMaker.startPage-1}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.pageMaker.criteria.searchType}&keyword=${map.pageMaker.criteria.keyword}">이전</a></li>
 					</c:if>		
 					<!-- 페이지 번호 -->
 					<c:forEach var="idx" 
@@ -79,11 +68,11 @@
 						end="${map.pageMaker.endPage}">
 						<li 
 						<c:out value="${map.pageMaker.criteria.page==idx?'class=active':'' }"/>
-						><a href="list?page=${idx}&perPageNum=${map.pageMaker.criteria.perPageNum}&category=${admin.category}">${idx}</a></li>
+						><a href="list?page=${idx}&perPageNum=${map.pageMaker.criteria.perPageNum}&category=${admin.category}&searchType=${map.pageMaker.criteria.searchType}&keyword=${map.pageMaker.criteria.keyword}">${idx}</a></li>
 					</c:forEach>
 					<!-- 다음 링크 -->
 					<c:if test="${map.pageMaker.next}">
-						<li><a href="list?page=${map.pageMaker.endPage+1}&perPageNum=${map.pageMaker.criteria.perPageNum}">다음</a></li>
+						<li><a href="list?page=${map.pageMaker.endPage+1}&perPageNum=${map.pageMaker.criteria.perPageNum}&searchType=${map.pageMaker.criteria.searchType}&keyword=${map.pageMaker.criteria.keyword}">다음</a></li>
 					</c:if>				
 				</c:if>
 			</ul>
@@ -102,17 +91,7 @@
 			</script>
 		</div>
 	</div>
-
-
-
-
-
-
-	<div class="box-header with-border">
-		 <a href="register?category=${admin.category}"><h3 class="box-title">게시물 작성</h3></a> 
-	</div>
-	
-	<div class="box-body text-center">
+<div class="box-body text-center">
 	<select name="searchType" id="searchType">
 		<option value="n"
 		 <c:out value="${map.pageMaker.criteria.searchType==null?'selected':''}"/>
@@ -137,6 +116,35 @@
 		id="searchBtn"/>	
 </div>
 
+
+
+
+
+	<div class="box-header with-border">
+		 <a href="register?category=${admin.category}"><h3 class="box-title">게시물 작성</h3></a> 
+	</div>
+	
+	
+
 	<%@ include file="../include/footer.jsp"%>
+	
+	
+	<script>
+	document.getElementById("searchBtn").addEventListener(
+		"click", function(){
+	//select 의 선택된 항목 찾기
+	//선택된 행 번호 가져오기
+	var x = document.getElementById("searchType").selectedIndex;
+	//select의 모든 값을 배열로 가져오기
+	var y = document.getElementById("searchType").options;
+	//keywoard에 입력된 값 가져오기
+	keyword = document.getElementById("keyword").value;
+				
+	location.href = 
+	"list?page=1&perPageNum=${map.pageMaker.criteria.perPageNum}"
+	+ "&searchType=" + y[x].value + "&keyword=" + keyword + "&category=" + ${admin.category};
+});
+</script>
+
 </body>
 </html>

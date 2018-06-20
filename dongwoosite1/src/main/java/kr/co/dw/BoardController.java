@@ -21,6 +21,7 @@ import kr.co.dw.dao.BoardDao;
 import kr.co.dw.domain.Admin;
 import kr.co.dw.domain.Board;
 import kr.co.dw.domain.Criteria;
+import kr.co.dw.domain.SearchCriteria;
 import kr.co.dw.service.AdminService;
 import kr.co.dw.service.BoardService;
 import oracle.net.aso.a;
@@ -34,11 +35,14 @@ public class BoardController {
 	
 	// 게시판 목록보기로가줌. ^&
 	@RequestMapping(value = "board/list", method = RequestMethod.GET)
-	public String list(Criteria criteria, Model model,HttpServletRequest request) {
+	public String list(SearchCriteria criteria, Model model,HttpServletRequest request) {
 		
 		Map<String, Object>map = boardService.list(criteria);
+		
 		model.addAttribute("map", map);
+		
 		Admin admin = adminService.categoryboard(request);
+		
 
 		
 
@@ -58,7 +62,7 @@ public class BoardController {
 
 	// 게시글 삽입하기
 	@RequestMapping(value = "board/register", method = RequestMethod.POST)
-	public String register(Criteria criteria,Model model, MultipartHttpServletRequest request) {
+	public String register(SearchCriteria criteria,Model model, MultipartHttpServletRequest request) {
 
 		boardService.register(request);
 		// 귀찮아서 위에 리스트 함수 소환!
@@ -72,12 +76,14 @@ public class BoardController {
 	 */
 	// 게시물 상세보기를 처리
 	@RequestMapping(value = "board/detail", method = RequestMethod.GET)
-	public String detail(Criteria criteria, HttpServletRequest request, Model model ) {
+	public String detail(SearchCriteria criteria, HttpServletRequest request, Model model ) {
 
 		// 아.. category 정보 가져와야지 목록으로 갈수있어서 ;;
 		Admin admin = adminService.categoryboard(request);
 		Board board = boardService.detail(request);
+		int replycnt = Integer.parseInt(request.getParameter("replycnt"));
 		
+		request.setAttribute("replycnt", replycnt);
 		
 		request.setAttribute("criteria", criteria);
 		request.setAttribute("admin", admin);
@@ -89,7 +95,7 @@ public class BoardController {
 	 * 3.BoardController 클래스에 게시글을 가져와서 수정보기 화면에 출력하는 메소드를 구현
 	 */// 게시물 수정보기를 처리
 	@RequestMapping(value = "board/update", method = RequestMethod.GET)
-	public String update(Criteria criteria,HttpServletRequest request, Model model) {
+	public String update(SearchCriteria criteria,HttpServletRequest request, Model model) {
 		Board board = boardService.updateView(request);
 	
 	
@@ -99,7 +105,7 @@ public class BoardController {
 	/*9.BoardController 클래스에 수정을 처리해 줄 메소드를 생성*/
 	//게시물 수정을 처리해 줄 메소드
 	@RequestMapping(value="board/update", method=RequestMethod.POST)
-	public String update(Criteria criteria,MultipartHttpServletRequest request, Model model,
+	public String update(SearchCriteria criteria,MultipartHttpServletRequest request, Model model,
 			RedirectAttributes attr) {
 
 		boardService.update(request);
@@ -115,7 +121,7 @@ public class BoardController {
 	//게시물 삭제를 처리해주는 메소드
 	@RequestMapping(value="board/delete", 
 		method=RequestMethod.GET)
-	public String delete(HttpServletRequest request, Model model,Criteria criteria,
+	public String delete(HttpServletRequest request, Model model,SearchCriteria criteria,
 			RedirectAttributes attr) {
 		//서비스 메소드 호출
 		boardService.delete(request);

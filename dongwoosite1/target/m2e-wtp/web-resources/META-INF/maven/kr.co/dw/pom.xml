@@ -28,6 +28,14 @@
 
 	<!-- Java가 기본적으로 제공해주지 않는 기능을 사용하기 위해서 다운로드 받을 라이브러리와 버전을 설정하는 것 -->
 	<dependencies>
+		<!-- pom.xml 파일에서 spring-websocket 의존성 추가 이거는 채팅을위한 소켓
+		 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
 		<!-- 2.pom.xml 파일에 aop를 사용하기 위한 의존성 라이브러리를 추가 -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

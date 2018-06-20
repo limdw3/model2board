@@ -112,8 +112,9 @@ table.type04 td {
 				</tr>
 				<c:forEach var="vo" items="${board}">
 				<c:if test="${vo.bigcategory==2}">
-					<tr>
-						<td align="center">${vo.boardname}&nbsp;</td>
+				<tr>
+						<!-- 이름을 클릭하면 board/list 로 보내는 태그에 보드이름 , 보드 pk 번호(d_board 의 외래키) , 페이징 설정을 태그에 넣어 보낸다.  -->
+						<td align="center"><a href="board/list?category=${vo.category}&boardname=${vo.boardname}&boardinfo=${vo.boardinfo}&boardpaging=${vo.boardpaging}"> ${vo.boardname}&nbsp;</a></td>
 						
 						
 					</tr>
@@ -130,7 +131,8 @@ table.type04 td {
 				<c:forEach var="vo" items="${board}">
 				<c:if test="${vo.bigcategory==3}">
 					<tr>
-						<td align="center">${vo.boardname}&nbsp;</td>
+						<!-- 이름을 클릭하면 board/list 로 보내는 태그에 보드이름 , 보드 pk 번호(d_board 의 외래키) , 페이징 설정을 태그에 넣어 보낸다.  -->
+						<td align="center"><a href="board/list?category=${vo.category}&boardname=${vo.boardname}&boardinfo=${vo.boardinfo}&boardpaging=${vo.boardpaging}"> ${vo.boardname}&nbsp;</a></td>
 						
 						
 					</tr>
