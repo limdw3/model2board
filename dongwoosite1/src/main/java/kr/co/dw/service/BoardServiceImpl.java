@@ -170,7 +170,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	/*
-	 * 2.BoardServiceImpl 클래스에 게시글을 가져와서 수정보기에 사용할 메소드를 구현
+	 BoardServiceImpl 클래스에 게시글을 가져와서 수정보기에 사용할 메소드를 구현
 	 */@Override
 	public Board updateView(HttpServletRequest request) {
 		// 파라미터 읽기

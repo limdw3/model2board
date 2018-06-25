@@ -18,19 +18,19 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
-	// 관리자페이지이자 지금은 게시판을 생성하는 곳으로 가줌.
+	// 관리페이지(게시판 생성) 이동 요청
 	@RequestMapping(value = "admin/controldiv", method = RequestMethod.GET)
 	public void control(Model model) {
 
 	}
-	// 게시판 추가해줌.
+	// 게시판 추가 요청 처리
 	@RequestMapping(value = "admin/controldiv", method = RequestMethod.POST)
 	public String registerboard(HttpServletRequest request, RedirectAttributes attr) {
 		adminService.registerboard(request);
 		
 		
 		
-		// 삽입, 삭제, 갱신 다음에는 리다이렉트로 이동
+		
 		return "redirect:/";
 
 	}

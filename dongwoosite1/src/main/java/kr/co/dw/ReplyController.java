@@ -19,9 +19,10 @@ public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 
-	// 댓글 저장을 위한 메소드
+	// 댓글 저장을 위한 요청
 	@RequestMapping(value = "reply/register", method = RequestMethod.GET)
 	public Map<String, Object> register(HttpServletRequest request) {
+		// 댓글 저장 처리 후 작동 유무 확인 
 		boolean result = replyService.register(request);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", result);

@@ -27,14 +27,14 @@ public class HomeController {
 	
 	@Autowired
 	private AdminService adminService;
-	// 디씨처럼 홈에서 바로 게시판 리스트 보여주기 위함.
+	// home 이 호출 될 떄 게시판 카테고리를 리스트를 처리한다.
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
-	
+		
 		List<Admin> list = new ArrayList<Admin>();
 	
 		list = adminService.listboard(request);
-	
+		
 		request.setAttribute("board", list);
 		
 

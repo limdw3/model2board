@@ -43,10 +43,8 @@ contextPath는 절대 경로를 만들기 위해서 추가 -->
 		<aside class="main-sidebar">
 		<section class="sidebar">
 			<ul class="nav nav-tabs">
-				<li role="presentation" class="active"><a href="#">메인</a></li>
-				<li role="presentation"><a href="#">목록보기</a></li>
-				<li role="presentation"><a href="#">게시물 쓰기</a></li>
-				<li role="presentation"><a href="#">회원가입</a></li>
+				<li role="presentation" class="active"><a href="${pageContext.request.contextPath}">메인</a></li>
+				
 			</ul>
 		</section>
 	</aside>

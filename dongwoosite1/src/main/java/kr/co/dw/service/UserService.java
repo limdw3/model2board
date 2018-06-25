@@ -34,8 +34,8 @@ public interface UserService {
 	// 회원정보 삭제
 	public void delete(HttpServletRequest request);
 
-	// 회원인증을 하자
+	// 회원인증 
 	public User regcode(HttpServletRequest request);
-	// 이메일과 코드를 받아서 비번을 랜덤으로 바꾸자
+	// 비밀번호 변경
 	public User resetpw(HttpServletRequest request);
 }

@@ -167,7 +167,7 @@ public class UserController {
 		public String resetdisp(Model model) {
 			return "user/resetdisp";
 		}
-		// 실제로 reset해주자
+		// 코드확인 후 임시비밀번호 이메일 발송.
 		@RequestMapping(value = "user/resetdisp", method = RequestMethod.POST)
 		public String resetpw(HttpServletRequest request, RedirectAttributes attr) {
 			
